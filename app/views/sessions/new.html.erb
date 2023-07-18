@@ -1,0 +1,26 @@
+<main class="form-signin text-center w-100 m-auto border rounded shadow">
+  <% if flash[:notice] %>
+    <div class="alert alert-danger">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <%= form_with url: "/", method: "post" do |form| %>
+    <%= image_tag("bock.png", alt: "Bündnerclub Logo", style: "height: 100px;", class: "mb-4") %>
+    <h1 class="h3 mb-3 fw-normal">Bitte Anmelden</h1>
+    <div class="form-floating">
+      <%= form.email_field :email, class: "form-control form-signin-top", id: "floatingInput", placeholder: "name@example.com", autocomplete: true %>
+      <%= form.label :floatingInput, "Email Addresse " %>
+    </div>
+    <div class="form-floating">
+      <%= form.password_field :password, class: "form-control form-signin-bottom", id: "floatingPassword", placeholder: "Passwort" %>
+      <%= form.label :floatingPassword, "Passwort", data: { for: "floatingPassword" } %>
+    </div>
+    <div class="checkbox mb-3">
+      <%= form.check_box :remember_me, checked: true %>
+      <%= form.label :remember_me, "Angemeldet bleiben" %>
+    </div>
+    <%= form.submit "Anmelden", class: "w-100 btn btn-lg btn-primary mb-2" %>
+  <% end %>
+  <small><%= link_to "Jetzt registrieren", new_user_path %></small><br />
+  <small><%= link_to "Passwort vergessen", new_password_reset_path %>
+</main>

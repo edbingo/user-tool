@@ -1,0 +1,84 @@
+<main class="h-100 d-flex align-items-md-center">
+  <div class="container">
+    <div class="row mt-4 mt-md-0">
+      <div class="col-md-8 mb-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title">Willkommen, <%= current_user.name %></h5>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th scope="row">Name</th>
+                  <td><%= current_user.name %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Email</th>
+                  <td><%= current_user.email %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Angehörige Uni</th>
+                  <td><%= University.find(current_user.university_id).name %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Mitglieder Beitrag:</th>
+                  <% if current_user.paid %>
+                    <td class="text-success"><%= bootstrap_icon("check") %></td>
+                  <% else %>
+                    <td class="text-danger"><%= bootstrap_icon("x") %> Noch nicht bezahlt!</td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+            <div class="d-flex flex-row-reverse">
+            <%= button_to "Abmelden", logout_path, class: "btn btn-secondary", method: :delete %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title">Konto Aktionen</h5>
+            <% unless current_user.paid %>
+              <%= link_to bootstrap_icon("credit-card-fill") + " Mitglieder Beitrag", '#', class: "btn btn-primary d-block mb-2" %>
+            <% end %>
+            <%= link_to bootstrap_icon("pencil-fill") + " Kontoangaben", '#', class: "btn btn-primary d-block mb-2" %>
+            <%= link_to bootstrap_icon("envelope-fill") + " Emails verwalten", "#", class: "btn btn-primary d-block mb-2" %>
+            <%= link_to bootstrap_icon("trash-fill") + " Konto Löschen", '#', class: "btn btn-danger d-block" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title">Nächste Events</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">Für mehr infos schaue auf unsere <a href="https://buendnerclub.ch" target="_blank">Homepage</a></h6>
+            <% unless @events.count == 0 %>
+              <table class="table">
+                <thead>
+                  <th>Datum</th>
+                  <th>Event</th>
+                  <th>Ort</th>
+                </thead>
+                <tbody>
+                  <% @events.each do |event| %>
+                    <tr>
+                      <td><%= event.date %></td>
+                      <td><%= event.name %></td>
+                      <td><%= event.location %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% else %>
+              <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Keine Events</h4>
+                <p>Dieses Semester sind keine Events mehr geplant, schaue nach den Ferien wieder vorbei!</p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

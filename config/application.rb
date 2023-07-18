@@ -1,15 +1,24 @@
 require_relative "boot"
 
 require "rails/all"
+require 'dotenv/load' if File.exist?(".env")
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+
 module UserTool
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+
+    if Rails.env.development?
+      config.action_cable.allowed_request_origins = ['http://localhost:4000']
+    elsif Rails.env.production?
+      config.action_cable.allowed_request_origins = ['https://buendnerclub.ch']    
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #

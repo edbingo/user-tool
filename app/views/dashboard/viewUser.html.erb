@@ -1,0 +1,46 @@
+<main class="w-100 m-auto border rounded shadow" style="max-width: 500px; padding: 15px;">
+    <div class="d-flex">
+  <%= link_to bootstrap_icon("arrow-left"), students_path, class: "btn" %><h4 class="align-middle my-auto"><%= @user.name %></h4>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">Name</th>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+        <th scope="row">Email</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th scope="row">Angehörige Uni</th>
+        <td><%= University.find(@user.university_id).name %></td>
+      </tr>
+      <tr>
+        <th scope="row">Mitglieder Beitrag:</th>
+        <% if @user.paid %>
+          <td class="text-success"><%= bootstrap_icon("check") %></td>
+        <% else %>
+          <td class="text-danger"><%= bootstrap_icon("x") %> Noch nicht bezahlt!</td>
+        <% end %>
+      </tr>
+      <tr>
+        <th scope="row">Mailinglisten:</th>
+        <td><%= @mailingLists %></td>
+      <tr>
+        <th scope="row">Mitglieder seit:</th>
+        <td><%= @user.created_at.strftime("%d.%m.%Y") %></td>
+    </tbody>
+  </table>
+  <div class="row g-2">
+    <div class="col gx-2">
+      <%= link_to bootstrap_icon("credit-card-fill") + " Zahlung", '#', class: "btn btn-primary w-100" %>
+    </div>
+    <div class="col gx-2">
+      <%= link_to bootstrap_icon("pencil-fill") + " Bearbeiten", '#', class: "btn btn-primary w-100" %>
+    </div>
+    <div class="col gx-2">
+      <%= button_to bootstrap_icon("trash-fill") + " Löschen", user_path(id: @user.id), method: :delete, class: "btn btn-danger w-100", data: { confirm: "Sind Sie sicher?" } %>
+    </div>
+  </div>
+</main>

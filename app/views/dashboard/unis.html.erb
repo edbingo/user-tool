@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex mb-2">
+      <h5 class="card-title my-auto">Aktive Unis</h5>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Anzahl Studenten</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @universities.each do |uni| %>
+            <tr class="align-middle">
+              <td><%= uni.name %></td>
+              <td> <%= User.where(university_id: uni.id).count %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

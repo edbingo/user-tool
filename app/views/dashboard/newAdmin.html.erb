@@ -1,0 +1,20 @@
+<main class="w-100 m-auto border rounded shadow" style="max-width: 500px; padding: 15px;">
+  <h4>Neuer Benutzer</h4>
+  <%= form_with url: "/new/admin", method: "post" do |form| %>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :Rolle, class: "form-label" %>
+      <%= form.select :role, { "Vorstand"=> 1, "Kommunikation" => 2, "Admin" => 3 }, {}, class: "form-select mb-3"
+                    %>
+    </div>
+    <%= form.select :university_id, options_for_select(University.all.map { |u| [u.name, u.id] }), { include_blank: "Wähle eine Hochschule..." }, class: "form-select mb-3", id: "floatingUniversity" %>
+    <%= form.submit "Create" , class: "btn btn-primary" %>
+  <% end %>
+</main>

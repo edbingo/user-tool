@@ -1,0 +1,62 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex mb-2">
+      <h5 class="card-title my-auto">Benutzer</h5>
+      <div class="ms-auto">
+        <%= link_to "Neuer Benutzer", new_admin_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Rolle
+          </th>
+          <th>
+            Aktionen
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.where("role > ?", 0).each do |user| %>
+          <tr class="align-middle">
+            <td>
+              <%= user.name %>
+            </td>
+            <td>
+              <%= user.email %>
+            </td>
+            <td>
+              <% if user.role == 1 %>
+                Vorstand
+              <% elsif user.role == 2 %>
+                Kommunikation
+              <% elsif user.role == 3 %>
+                Admin
+              <% else %>
+                Unknown
+              <% end %>
+            </td>
+            <td>
+              <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Aktionen
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li><%= link_to "Bearbeiten", edit_admin_path(id: user.id), class: "dropdown-item" %></li>
+                  <li><%= button_to "Löschen", user_path, method: :delete, class: "dropdown-item text-danger", data: { confirm: "Are you sure you want to delete this user?" }, params: { id: user.id } %></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<main class="w-100 m-auto border rounded shadow" style="max-width: 500px; padding: 15px;">
+  <h4>Neuer Benutzer</h4>
+  <%= form_with model: @user, url: "/edit/admin", method: "post" do |form| %>
+    <%= hidden_field_tag :id, @user.id %>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :Rolle, class: "form-label" %>
+      <%= form.select :role, { "Vorstand"=> 1, "Kommunikation" => 2, "Admin" => 3 }, { selected: @user.role }, class: "form-select mb-3"
+                    %>
+    </div>
+    <%= form.hidden_field_tag :password_digest, @user.password_digest %>
+    <%= form.select :university_id, options_for_select(University.all.map { |u| [u.name, u.id] }, @user.university_id), class: "form-select mb-3" %>
+    <%= form.submit "Speichern" , class: "btn btn-primary w-100" %>
+  <% end %>
+</main>

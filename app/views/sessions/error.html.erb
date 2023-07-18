@@ -1,0 +1,10 @@
+<main class="form-signin text-center w-100 m-auto rounded border shadow">
+  <%= image_tag("bock.png", alt: "Bündnerclub Logo", style: "height: 100px;", class: "mb-4") %>
+  <h1 class="h3 mb-3 fw-normal">Error</h1>
+  <% if flash[:notice] %>
+    <div class="alert alert-error">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <%= link_to "Zurück", @future, class: "btn btn-lg btn-primary w-100" %>
+</main>

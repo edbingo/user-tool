@@ -1,0 +1,18 @@
+<main class="form-signin text-center w-100 m-auto border rounded shadow">
+  <%= form_with(model: @user, url: password_reset_path(params[:id])) do |form| %>
+    <%= image_tag("bock.png", alt: "Bündnerclub Logo", style: "height: 100px;", class: "mb-4") %>
+    <h1 class="h3 mb-3 fw-normal">Passwort Zurücksetzen</h1>
+    <div class="form-floating">
+      <%= form.password_field :password, class: "form-control form-signin-top", id: "floatingInput", placeholder: "name@example.com", autocomplete: true, pattern: ".{6,}", title: "Please enter at least 6 characters" %>
+      <%= form.label :floatingInput, "Passwort" %>
+    </div>
+    <div class="form-floating">
+      <%= form.password_field :password_confirmation, class: "form-control form-signin-bottom", id: "floatingInput", placeholder: "name@example.com", autocomplete: true %>
+      <%= form.label :floatingInput, "Bestätigen" %>
+    </div>
+    <%= hidden_field_tag :email, @user.email %>
+    <%= form.submit "Zurücksetzen", class: "w-100 btn btn-lg btn-primary mb-2" %>
+  <% end %>
+  <small><%= link_to "Abbrechen", root_path %></small><br />
+</main>
+

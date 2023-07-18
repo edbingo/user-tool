@@ -1,0 +1,23 @@
+de:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              presence: "muss angegeben werden"
+              length:
+                maximum: "darf maximal %{count} Zeichen lang sein"
+            email:
+              presence: "muss angegeben werden"
+              length:
+                maximum: "darf maximal %{count} Zeichen lang sein"
+              format: "ist ungültig"
+              uniqueness: "ist bereits vergeben"
+            password:
+              presence: "muss angegeben werden"
+              length:
+                minimum: "muss mindestens %{count} Zeichen lang sein"
+            university_id:
+              presence: "muss angegeben werden"
+              not_a_number: "ist keine Zahl"

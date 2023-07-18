@@ -1,0 +1,17 @@
+<main class="form-signin text-center w-100 m-auto border rounded shadow">
+  <% if flash[:notice] %>
+    <div class="alert alert-danger">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <%= form_with(url: password_resets_path, scope: :password_reset) do |form| %>
+    <%= image_tag("bock.png", alt: "Bündnerclub Logo", style: "height: 100px;", class: "mb-4") %>
+    <h1 class="h3 mb-3 fw-normal">Passwort vergessen?</h1>
+    <div class="form-floating">
+      <%= form.email_field :email, class: "form-control mb-3", id: "floatingInput", placeholder: "name@example.com", autocomplete: true %>
+      <%= form.label :floatingInput, "Email Addresse" %>
+    </div>
+    <%= form.submit "Zurücksetzen", class: "w-100 btn btn-lg btn-primary mb-2" %>
+  <% end %>
+  <small><%= link_to "Zurück", root_path %></small><br />
+</main>

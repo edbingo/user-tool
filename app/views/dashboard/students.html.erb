@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4 class="my-auto">Mitglieder</h4>
+      <%= link_to bootstrap_icon("plus-lg"), new_user_path, class: "btn btn-primary" %>
+    </div>
+    <div class="my-2">
+      <%= form_with(url: students_path, method: :get) do |form| %>
+        <div class="my-auto input-group">
+          <%= form.text_field :search, class: "form-control", placeholder: "Search by name" %>
+          <button class="btn btn-outline-secondary" type="submit"><%= bootstrap_icon("search") %></button>
+        </div>
+      <% end %>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered rounded mb-0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th class="text-center">$$$</th>
+            <th class="text-center">Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |stud| %>
+            <tr class="align-middle">
+              <td><%= stud.name %></td>
+              <td><%= stud.email %></td>
+              <% if stud.paid %>
+                <td class="text-success text-center"><%= bootstrap_icon "check" %></td>
+              <% else %>
+                <td class="text-danger text-center"><%= bootstrap_icon "x" %></td>
+              <% end %>
+              <td>
+                <%= link_to bootstrap_icon("three-dots"), user_path(id: stud.id), class: "btn btn-sm btn-primary w-100" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

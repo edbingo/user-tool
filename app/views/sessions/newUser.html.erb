@@ -1,0 +1,29 @@
+<main class="form-signin text-center w-100 m-auto border rounded shadow">
+  <%= form_with url: "/new/user", method: "post" do |form| %>
+    <%= image_tag("bock.png", alt: "Bündnerclub Logo", style: "height: 100px;", class: "mb-4") %>
+    <h1 class="h3 mb-3 fw-normal">Registrieren</h1>
+    <div class="form-floating">
+      <%= form.email_field :email, class: "form-control form-signin-top", id: "floatingInput", placeholder: "name@example.com", autocomplete: true %>
+      <%= form.label :floatingInput, "Email Addresse " %>
+    </div>
+    <div class="form-floating">
+      <%= form.text_field :name, class: "form-control form-signin-middle", id: "floatingName", placeholder: "Name", autocomplete: true %>
+      <%= form.label :floatingName, "Name" %>
+    </div>
+    <div class="form-floating">
+      <%= form.password_field :password, class: "form-control form-signin-middle", id: "floatingPassword", placeholder: "Passwort" %>
+      <%= form.label :floatingPassword, "Passwort" %>
+    </div>
+    <div class="form-floating">
+      <%= form.password_field :password_confirmation, class: "form-control form-signin-bottom", id: "floatingPasswordConfirm", placeholder: "Passwort" %>
+      <%= form.label :floatingPasswordConfirm, "Bestätigen" %>
+    </div>
+    <div class="form-floating" style="display: none !important;">
+    <%= form.text_field :telephone, id: "telephone", style: "display: none !important;", tabindex: "-1", autocomplete: "off" %>
+    <%= form.label :telephone, "Telefon" %>
+    </div>
+    <%= form.select :university_id, options_for_select(@universities.map { |u| [u.name, u.id] }), { include_blank: "Wähle eine Hochschule..." }, class: "form-select mb-3", id: "floatingUniversity" %>
+    <%= form.submit "Registrieren", class: "w-100 btn btn-lg btn-primary mb-2" %>
+  <% end %>
+  <small><%= link_to "Schon registriert?", root_path %></small>
+</main>
